@@ -93,9 +93,8 @@ task8(){
 
   i=1
   while [[ $i -le $totalValidator ]]; do
-
-    echo -e "Enter password for validator $i: "
-    read password
+    echo -e "\n\n${GREEN}+-----------------------------------------------------------------------------------------------------+"
+    read -p "\nEnter password for validator $i:  " password
     echo $password >./chaindata/node$i/pass.txt
     ./node_src/build/bin/geth --datadir ./chaindata/node$i account new --password ./chaindata/node$i/pass.txt
     ./node_src/build/bin/geth --datadir ./chaindata/node$i init ./genesis.json
@@ -112,7 +111,7 @@ labelNodes(){
     ((i += 1))
   done 
 
-  i=$totalValidator+1
+  i=$((totalValidator + 1))
   while [[ $i -le $totalNodes ]]; do
     touch ./chaindata/node$i/.rpc
     ((i += 1))
