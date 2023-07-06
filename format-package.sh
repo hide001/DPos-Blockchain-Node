@@ -19,6 +19,9 @@ totalNodes=$(($totalRpc + $totalValidator))
 #|                                                                                                                              |     
 #+------------------------------------------------------------------------------------------------+
 
+getInstalledNodes(){
+        
+}
 
 
 displayStatus(){
@@ -50,15 +53,15 @@ task1(){
 
 displayWelcome(){
   # display welcome message
-  echo -e "\n\n\t${ORANGE}Total RPC to be created: $totalRpc"
-  echo -e "\t${ORANGE}Total Validators to be created: $totalValidator"
-  echo -e "\t${ORANGE}Total nodes to be created: $totalNodes"
-  echo -e "\n\n${RED}
-  \t+------------------------------------------------+
+  echo -e "\n\n\t${ORANGE}Total RPC installed: $totalRpc"
+  echo -e "\t${ORANGE}Total Validators installed: $totalValidator"
+  echo -e "\t${ORANGE}Total nodes installed: $totalNodes"
+  echo -e "\n\n${ORANGE}
+  \t+------------------------------------------------------------------+
   \t|   PAY ATTENTION !
   \t|   Running this tool will delete all exixting node installation and corresponding data
   \t|   Remember to backup any data that you need before running this
-  \t+------------------------------------------------+
+  \t+------------------------------------------------------------------+
   ${NC}\n"
 
   echo -e "${ORANGE}

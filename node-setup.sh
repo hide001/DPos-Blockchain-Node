@@ -105,6 +105,22 @@ task8(){
   echo -e "\n${GREEN}[TASK 8 PASSED]${NC}\n"
 }
 
+labelNodes(){
+  i=1
+  while [[ $i -le $totalValidator ]]; do
+    touch ./chaindata/node$i/.validator
+    ((i += 1))
+  done 
+
+  i=$totalValidator+1
+  while [[ $i -le $totalNodes ]]; do
+    touch ./chaindata/node$i/.rpc
+    ((i += 1))
+  done 
+
+
+}
+
 displayStatus(){
   # start the node
   echo -e "\n Your newly created account and password is located at ./chaindata/node1"
@@ -148,6 +164,7 @@ finalize(){
   displayWelcome
   createRpc
   createValidator
+  labelNodes
   displayStatus
 }
 
