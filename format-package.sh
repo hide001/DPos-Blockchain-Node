@@ -19,9 +19,9 @@ totalNodes=$(($totalRpc + $totalValidator))
 #|                                                                                                                              |     
 #+------------------------------------------------------------------------------------------------+
 
-getInstalledNodes(){
-        
-}
+# getInstalledNodes(){
+
+# }
 
 
 displayStatus(){
