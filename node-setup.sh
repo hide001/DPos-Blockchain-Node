@@ -174,6 +174,8 @@ usage() {
   echo " -h, --help      Display this help message"
   echo " -v, --verbose   Enable verbose mode"
   echo " -f, --file      FILE Specify an output file"
+  echo "--rpc  <whole number>     Specify number of rpc node to create"
+  echo "--validator  <whole number>     Specify number of validator node to create"
 }
 
 has_argument() {
@@ -222,15 +224,6 @@ handle_options() {
       fi
       totalRpc=$(extract_argument $@)
       totalNodes=$(($totalRpc + $totalValidator))
-      displayWelcome
-      task1
-      task2
-      task3
-      task4
-      task5
-      task6
-      task7
-      displayStatus
       shift
       ;;
 
@@ -243,16 +236,6 @@ handle_options() {
       fi
       totalValidator=$(extract_argument $@)
       totalNodes=$(($totalRpc + $totalValidator))
-      displayWelcome
-      task1
-      task2
-      task3
-      task4
-      task5
-      task6
-      task7
-      task8
-      displayStatus
       shift
       ;;
 
@@ -288,5 +271,5 @@ fi
 
 
 
-
+finalize
 
