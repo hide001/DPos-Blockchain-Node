@@ -32,7 +32,7 @@ task1(){
   echo -e "Are you sure want to continue and completly format & delte all the existing node installations? (Y/N)"
   read input
   
-  if [ "$input" = "y" || "$input" = "Y" ]; then
+  if [ $input eq "y" || $input eq "Y" ]; then
         echo "${RED} Format in progress..."
         cd ./chaindata
         rm -rf ./*
@@ -49,9 +49,9 @@ displayWelcome(){
   echo -e "\n\n\t${ORANGE}Total RPC to be created: $totalRpc"
   echo -e "\t${ORANGE}Total Validators to be created: $totalValidator"
   echo -e "\t${ORANGE}Total nodes to be created: $totalNodes"
-  echo -e "\n\n${GREEN}
+  echo -e "\n\n${RED}
   \t+------------------------------------------------+
-  \t|   ${RED} PAY ATTENTION !
+  \t|   PAY ATTENTION !
   \t|   Running this tool will delete all exixting node installation and corresponding data
   \t|   Remember to backup any data that you need before running this
   \t+------------------------------------------------+

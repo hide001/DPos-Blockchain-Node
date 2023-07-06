@@ -113,7 +113,7 @@ displayStatus(){
 
 displayWelcome(){
   # display welcome message
-  echo -e "\t${ORANGE}Total RPC to be created: $totalRpc"
+  echo -e "\t\n\n${ORANGE}Total RPC to be created: $totalRpc"
   echo -e "\t${ORANGE}Total Validators to be created: $totalValidator"
   echo -e "\t${ORANGE}Total nodes to be created: $totalNodes"
   echo -e "${GREEN}
