@@ -32,7 +32,7 @@ task1(){
   echo -e "Are you sure want to continue and completly format & delte all the existing node installations? (Y/N)"
   read input
   
-  if [ $input eq "y" || $input eq "Y" ]; then
+  if [ "$input" == "y" || "$input" == "Y" ]; then
         echo "${RED} Format in progress..."
         cd ./chaindata
         rm -rf ./*
