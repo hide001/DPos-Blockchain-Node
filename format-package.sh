@@ -33,7 +33,7 @@ task1(){
                 read -p "Are you sure want to continue and completly format & delte all the existing node installations? (Y/N) " yn
                 case $yn in
                         [Yy]* ) 
-                                        echo "${RED} Format in progress..."
+                                        echo -e "${RED} Format in progress..."
                                         cd ./chaindata
                                         rm -rf ./*
                                         cd ../tmp
