@@ -32,6 +32,27 @@ task1(){
   echo -e "Are you sure want to continue and completly format & delte all the existing node installations? (Y/N)"
   read input
   
+        while true; do
+                read -p "Are you sure want to continue and completly format & delte all the existing node installations? (Y/N) " yn
+                case $yn in
+                        [Yy]* ) 
+                                        echo "${RED} Format in progress..."
+                                        cd ./chaindata
+                                        rm -rf ./*
+                                        cd ../tmp
+                                        rm -rf ./*
+                                        cd ../
+                                        displayStatus
+                                 break;;
+                        [Nn]* ) exit;;
+                        * ) echo "Please answer yes or no.";;
+                esac
+        done
+
+
+
+
+
   if [ [$input == 'y'] ]; then
         echo "${RED} Format in progress..."
         cd ./chaindata
