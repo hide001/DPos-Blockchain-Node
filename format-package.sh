@@ -29,9 +29,6 @@ displayStatus(){
 task1(){
   # update and upgrade the server TASK 1
   echo -e "\n\n${ORANGE}TASK: ${RED}[FORMATTING INSTALLATION]${NC}\n"
-  echo -e "Are you sure want to continue and completly format & delte all the existing node installations? (Y/N)"
-  read input
-  
         while true; do
                 read -p "Are you sure want to continue and completly format & delte all the existing node installations? (Y/N) " yn
                 case $yn in
@@ -48,20 +45,6 @@ task1(){
                         * ) echo "Please answer yes or no.";;
                 esac
         done
-
-
-
-
-
-  if [ [$input == 'y'] ]; then
-        echo "${RED} Format in progress..."
-        cd ./chaindata
-        rm -rf ./*
-        cd ../tmp
-        rm -rf ./*
-        cd ../
-        displayStatus
-  fi
   echo -e "\n${GREEN}[TASK PASSED]${NC}\n"
 }
 
