@@ -53,9 +53,9 @@ task1(){
 
 displayWelcome(){
   # display welcome message
-  echo -e "\n\n\t${ORANGE}Total RPC installed: $totalRpc"
-  echo -e "\t${ORANGE}Total Validators installed: $totalValidator"
-  echo -e "\t${ORANGE}Total nodes installed: $totalNodes"
+#   echo -e "\n\n\t${ORANGE}Total RPC installed: $totalRpc"
+#   echo -e "\t${ORANGE}Total Validators installed: $totalValidator"
+#   echo -e "\t${ORANGE}Total nodes installed: $totalNodes"
   echo -e "\n\n${ORANGE}
   \t+------------------------------------------------------------------+
   \t|   PAY ATTENTION !

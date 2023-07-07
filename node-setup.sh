@@ -21,28 +21,28 @@ totalNodes=$(($totalRpc + $totalValidator))
 
 task1(){
   # update and upgrade the server TASK 1
-  echo -e "\n\n${ORANGE}TASK: ${GREEN}[running upgrade]${NC}\n"
+  echo -e "\n\n${ORANGE}TASK: ${GREEN}[Setting up environment]${NC}\n"
   apt update && apt upgrade -y
   echo -e "\n${GREEN}[TASK 1 PASSED]${NC}\n"
 }
 
 task2(){
   # installing build-essential TASK 2
-  echo -e "\n${ORANGE}TASK: ${GREEN}[installing build-essential]${NC}\n"
+  echo -e "\n${ORANGE}TASK: ${GREEN}[Setting up environment]${NC}\n"
   apt -y install build-essential tree
   echo -e "\n${GREEN}[TASK 2 PASSED]${NC}\n"
 }
 
 task3(){
   # getting golang TASK 3
-  echo -e "\n${ORANGE}TASK: ${GREEN}[getting golang v 1.17.3]${NC}\n"
+  echo -e "\n${ORANGE}TASK: ${GREEN}[Getting GO]${NC}\n"
   cd ./tmp && wget "https://go.dev/dl/go1.17.3.linux-amd64.tar.gz"
   echo -e "\n${GREEN}[TASK 3 PASSED]${NC}\n"
 }
 
 task4(){
   # setting up golang TASK 4
-  echo -e "\n${ORANGE}TASK: ${GREEN}[installing golang]${NC}\n"
+  echo -e "\n${ORANGE}TASK: ${GREEN}[Setting GO]${NC}\n"
   rm -rf /usr/local/go && tar -C /usr/local -xzf go1.17.3.linux-amd64.tar.gz
   echo "PATH=$PATH:/usr/local/go/bin" >>/etc/profile
   export PATH=$PATH:/usr/local/go/bin
@@ -52,7 +52,7 @@ task4(){
 
 task5(){
   # set proper group and permissions TASK 5
-  echo -e "\n${ORANGE}TASK: ${GREEN}[setting up group and permissions]${NC}\n"
+  echo -e "\n${ORANGE}TASK: ${GREEN}[Setting up Permissions]${NC}\n"
   ls -all
   cd ../
   ls -all
@@ -63,7 +63,7 @@ task5(){
 
 task6(){
   # do make all TASK 6
-  echo -e "\n${ORANGE}TASK: ${GREEN}[making all]${NC}\n"
+  echo -e "\n${ORANGE}TASK: ${GREEN}[Building Backend]${NC}\n"
   cd node_src
   make all
   echo -e "\n${GREEN}[TASK 6 PASSED]${NC}\n"
@@ -71,7 +71,7 @@ task6(){
 
 task7(){
   # setting up directories and structure for node/s TASK 7
-  echo -e "\n${ORANGE}TASK: ${GREEN}[setting up directories]${NC}\n"
+  echo -e "\n${ORANGE}TASK: ${GREEN}[Building Backend]${NC}\n"
 
   cd ../
 
@@ -87,7 +87,7 @@ task7(){
 
 task8(){
   #TASK 8
-  echo -e "\n${ORANGE}TASK: ${GREEN}[getting password for account]${NC}\n"
+  echo -e "\n${ORANGE}TASK: ${GREEN}[Setting up Accounts]${NC}\n"
   echo -e "\n${ORANGE}This step is very important. Input a password that will be used for a newly created validator account. In next step you will recieve a public key for your validator account"
   echo -e "${ORANGE}Once a validator account is created using your given password, I'll give you where the keystore file is located so you can import it in metamask\n\n${NC}"
 
@@ -116,13 +116,11 @@ labelNodes(){
     touch ./chaindata/node$i/.rpc
     ((i += 1))
   done 
-
-
 }
 
 displayStatus(){
   # start the node
-  echo -e "\n Your newly created account and password is located at ./chaindata/node1"
+  echo -e "\n Your newly created account and password is located at ./chaindata/node[1,2,3..n]"
   echo -e "\n${ORANGE}STATUS: ${GREEN}ALL TASK PASSED!\n This program will now exit\n Now run ./node-start.sh${NC}\n"
 }
 
@@ -133,9 +131,9 @@ displayWelcome(){
   echo -e "\t${ORANGE}Total nodes to be created: $totalNodes"
   echo -e "${GREEN}
   \t+------------------------------------------------+
-  \t|   DPos node installation Wizard
-  \t|   Target OS: Ubuntu 20.04 LTS (Focal Fossa)
-  \t|   Your OS: $(. /etc/os-release && printf '%s\n' "${PRETTY_NAME}") 
+  \t+   DPos node installation Wizard
+  \t+   Target OS: Ubuntu 20.04 LTS (Focal Fossa)
+  \t+   Your OS: $(. /etc/os-release && printf '%s\n' "${PRETTY_NAME}") 
   \t+------------------------------------------------+
   ${NC}\n"
 
@@ -143,6 +141,15 @@ displayWelcome(){
   \t+------------------------------------------------+
   \t+------------------------------------------------+
   ${NC}"
+}
+
+doUpdate(){
+  echo -e "${GREEN}
+  \t+------------------------------------------------+
+  \t+       UPDATING TO LATEST    
+  \t+------------------------------------------------+
+  ${NC}"
+  git pull
 }
 
 createRpc(){
@@ -153,6 +160,13 @@ createRpc(){
   task5
   task6
   task7
+  i=$((totalValidator + 1))
+  while [[ $i -le $totalNodes ]]; do
+    read -p "Enter Virtual Host(example: rpc.yourdomain.tld) without https/http " vhost
+    echo "VHOST=$vhost" >> ./.env
+    ./node_src/build/bin/geth --datadir ./chaindata/node$i init ./genesis.json
+    ((i += 1))
+  done
 }
 
 createValidator(){
@@ -161,6 +175,7 @@ createValidator(){
 
 finalize(){
   displayWelcome
+  doUpdate
   createRpc
   createValidator
   labelNodes
@@ -185,13 +200,12 @@ output_file=""
 
 # Function to display script usage
 usage() {
-  echo "Usage: $0 [OPTIONS]"
+  echo -e "\nUsage: $0 [OPTIONS]"
   echo "Options:"
-  echo " -h, --help      Display this help message"
-  echo " -v, --verbose   Enable verbose mode"
-  echo " -f, --file      FILE Specify an output file"
-  echo "--rpc  <whole number>     Specify number of rpc node to create"
-  echo "--validator  <whole number>     Specify number of validator node to create"
+  echo -e "\t\t -h, --help      Display this help message"
+  echo -e " \t\t -v, --verbose   Enable verbose mode"
+  echo -e "\t\t --rpc      Specify to create RPC node"
+  echo -e "\t\t --validator  <whole number>     Specify number of validator node to create"
 }
 
 has_argument() {
@@ -232,15 +246,9 @@ handle_options() {
       ;;
 
     # take ROC count
-    --rpc*)
-      if ! has_argument $@; then
-        echo "No number given" >&2
-        usage
-        exit 1
-      fi
-      totalRpc=$(extract_argument $@)
+    --rpc)
+      totalRpc=1
       totalNodes=$(($totalRpc + $totalValidator))
-      shift
       ;;
 
     # take validator count
@@ -286,6 +294,5 @@ if [ $# -eq 0 ]
 fi
 
 
-
+# bootstraping
 finalize
-
