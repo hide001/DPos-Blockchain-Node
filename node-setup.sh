@@ -97,7 +97,6 @@ task8(){
     read -p "Enter password for validator $i:  " password
     echo $password >./chaindata/node$i/pass.txt
     ./node_src/build/bin/geth --datadir ./chaindata/node$i account new --password ./chaindata/node$i/pass.txt
-    ./node_src/build/bin/geth --datadir ./chaindata/node$i init ./genesis.json
     ((i += 1))
   done
 
@@ -171,6 +170,11 @@ createRpc(){
 
 createValidator(){
    task8
+   i=1
+  while [[ $i -le $totalValidator ]]; do
+    ./node_src/build/bin/geth --datadir ./chaindata/node$i init ./genesis.json
+    ((i += 1))
+  done
 }
 
 finalize(){
