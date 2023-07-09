@@ -19,10 +19,22 @@ totalNodes=$(($totalRpc + $totalValidator))
 #|                                                                                                                              |     
 #+------------------------------------------------------------------------------------------------+
 
-# getInstalledNodes(){
-
-# }
-
+countNodes(){
+  local i=1
+  totalNodes=$(ls -l | grep -c ^d)
+  while [[ $i -le $totalNodes ]]; do
+    
+    if [ -f "./chaindata/$rpcFlag" ]; then  
+      totalRpc+=1 
+    else  
+        if [ -f "./chaindata/$validatorFlag" ]; then
+        totalValidator+=1
+        fi
+    fi  
+    
+    ((i += 1))
+  done 
+}
 
 displayStatus(){
   # start the node
@@ -53,9 +65,9 @@ task1(){
 
 displayWelcome(){
   # display welcome message
-#   echo -e "\n\n\t${ORANGE}Total RPC installed: $totalRpc"
-#   echo -e "\t${ORANGE}Total Validators installed: $totalValidator"
-#   echo -e "\t${ORANGE}Total nodes installed: $totalNodes"
+  echo -e "\n\n\t${ORANGE}Total RPC installed: $totalRpc"
+  echo -e "\t${ORANGE}Total Validators installed: $totalValidator"
+  echo -e "\t${ORANGE}Total nodes installed: $totalNodes"
   echo -e "\n\n${ORANGE}
   \t+------------------------------------------------------------------+
   \t|   PAY ATTENTION !
@@ -80,6 +92,10 @@ displayWelcome(){
 #|                                                                                                                             |
 #|                                                                                                                             |
 #+-----------------------------------------------------------------------------------------------+
+finalize(){
+  countNodes
+  displayWelcome
+  task1
+}
 
-displayWelcome
-task1
+finalize

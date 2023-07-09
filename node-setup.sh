@@ -44,7 +44,7 @@ task4(){
   # setting up golang TASK 4
   echo -e "\n${ORANGE}TASK: ${GREEN}[Setting GO]${NC}\n"
   rm -rf /usr/local/go && tar -C /usr/local -xzf go1.17.3.linux-amd64.tar.gz
-  echo "PATH=$PATH:/usr/local/go/bin" >>/etc/profile
+  echo -e "\nPATH=$PATH:/usr/local/go/bin" >>/etc/profile
   export PATH=$PATH:/usr/local/go/bin
   go env -w GO111MODULE=off
   echo -e "\n${GREEN}[TASK 4 PASSED]${NC}\n"
@@ -119,7 +119,6 @@ labelNodes(){
 
 displayStatus(){
   # start the node
-  echo -e "\n Your newly created account and password is located at ./chaindata/node[1,2,3..n]"
   echo -e "\n${ORANGE}STATUS: ${GREEN}ALL TASK PASSED!\n This program will now exit\n Now run ./node-start.sh${NC}\n"
 }
 
@@ -162,7 +161,7 @@ createRpc(){
   i=$((totalValidator + 1))
   while [[ $i -le $totalNodes ]]; do
     read -p "Enter Virtual Host(example: rpc.yourdomain.tld) without https/http " vhost
-    echo "VHOST=$vhost" >> ./.env
+    echo -e "\nVHOST=$vhost" >> ./.env
     ./node_src/build/bin/geth --datadir ./chaindata/node$i init ./genesis.json
     ((i += 1))
   done
@@ -177,12 +176,17 @@ createValidator(){
   done
 }
 
+# get external IP of this server
+fetchNsetIP(){
+  echo -e "\nIP=$(curl http://checkip.amazonaws.com)" >> ./.env
+}
+
 finalize(){
   displayWelcome
-  doUpdate
   createRpc
   createValidator
   labelNodes
+  fetchNsetIP
   displayStatus
 }
 
@@ -265,6 +269,12 @@ handle_options() {
       totalValidator=$(extract_argument $@)
       totalNodes=$(($totalRpc + $totalValidator))
       shift
+      ;;
+
+      # check for update and do update
+      --update)
+      doUpdate
+      exit 0
       ;;
 
     *)

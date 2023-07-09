@@ -17,31 +17,9 @@ rpcFlag=.rpc
 validatoFlag=.validator
 isRPC=false
 isValidator=false
+
 #########################################################################
-
-
 source ./.env
-
-
-
-# echo -e "${GREEN}**********************************************************************"
-# echo -e "Starting node"
-
-
-#     if tmux has-session -t 0 > /dev/null 2>&1; then
-#         :
-#     else
-#         tmux new-session -d -s 0
-#         tmux send-keys -t 0 "./node_src/build/bin/geth --datadir ./chaindata/node1 --networkid $CHAINID --bootnodes $BOOTNODE --mine --unlock 0 --password ./chaindata/node1/pass.txt --syncmode=full console" Enter
-#     fi
-
-# echo -e "${ORANGE}Node started\nEnter ${GREEN}tmux attach -t 0 ${ORANGE}to see node in action${NC}"
-# echo -e "\n${ORANGE}Now give your tmux-geth instance sometime to sync till the recent block. Once it's done you can go to staking page and activate your validator by staking"
-# echo -e "\n${ORANGE}Remember to import the account's key store file into you metmask for staking.${NC}"
-# echo -e "\n${GREEN}**********************************************************************"
-
-
-
 #########################################################################
 
 #+-----------------------------------------------------------------------------------------------+
@@ -74,7 +52,7 @@ welcome(){
 
 countNodes(){
   local i=1
-  $totalNodes=$(ls -l | grep -c ^d)
+  totalNodes=$(ls -l | grep -c ^d)
   while [[ $i -le $totalNodes ]]; do
     
     if [ -f "./chaindata/$rpcFlag" ]; then  
@@ -98,7 +76,7 @@ startRpc(){
         :
     else
         tmux new-session -d -s node$i
-        tmux send-keys -t node$i " ./node_src/build/bin/geth --datadir ./chaindata/node$i --networkid $CHAINID --ws --ws.addr 0.0.0.0 --ws.origins '*' --ws.port 8545 --http --http.port 80 --rpc.txfeecap 0  --http.corsdomain '*' --nat 'any' --http.api db,eth,net,web3,personal,txpool,miner,debug --http.addr 0.0.0.0 --http.vhosts=$VHOST --vmdebug --pprof --pprof.port 6060 --pprof.addr 0.0.0.0 --syncmode full --gcmode=archive  --ipcpath './chaindata/node$i/geth.ipc' console" Enter
+        tmux send-keys -t node$i " ./node_src/build/bin/geth --datadir ./chaindata/node$i --networkid $CHAINID --ws --ws.addr $IP --ws.origins '*' --ws.port 8545 --http --http.port 80 --rpc.txfeecap 0  --http.corsdomain '*' --nat 'any' --http.api db,eth,net,web3,personal,txpool,miner,debug --http.addr $IP --http.vhosts=$VHOST --vmdebug --pprof --pprof.port 6060 --pprof.addr $IP --syncmode full --gcmode=archive  --ipcpath './chaindata/node$i/geth.ipc' console" Enter
        
     fi
 
@@ -116,14 +94,13 @@ startValidator(){
         :
     else
         tmux new-session -d -s node$i
-        tmux send-keys -t 0 "./node_src/build/bin/geth --datadir ./chaindata/node$i --networkid $CHAINID --bootnodes $BOOTNODE --mine --port 326$j --unlock 0 --password ./chaindata/node$i/pass.txt --syncmode=full console" Enter
+        tmux send-keys -t 0 "./node_src/build/bin/geth --datadir ./chaindata/node$i --networkid $CHAINID --bootnodes $BOOTNODE --mine --port 326$j --nat extip:$IP --unlock 0 --password ./chaindata/node$i/pass.txt --syncmode=full console" Enter
     fi
 
     ((i += 1))
     ((j += 1))
   done 
 }
-
 
 finalize(){
   welcome
