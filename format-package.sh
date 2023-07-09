@@ -25,10 +25,12 @@ countNodes(){
   while [[ $i -le $totalNodes ]]; do
     
     if [ -f "./chaindata/node$i/.rpc" ]; then  
-      totalRpc+=1 
+      # ((++totalRpc))
+      ((totalRpc += 1))
     else  
         if [ -f "./chaindata/node$i/.validator" ]; then
-        totalValidator+=1
+        # ((++totalValidator))
+        ((totalValidator += 1))
         fi
     fi  
     
