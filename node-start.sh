@@ -86,7 +86,7 @@ startRpc(){
 
 startValidator(){
   i=1
-  j=68
+  j=69
   while [[ $i -le $totalValidator ]]; do
     
     if tmux has-session -t node$i > /dev/null 2>&1; then

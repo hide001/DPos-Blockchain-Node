@@ -160,7 +160,7 @@ createRpc(){
   task7
   i=$((totalValidator + 1))
   while [[ $i -le $totalNodes ]]; do
-    read -p "Enter Virtual Host(example: rpc.yourdomain.tld) without https/http " vhost
+    read -p "Enter Virtual Host(example: rpc.yourdomain.tld) without https/http: " vhost
     echo -e "\nVHOST=$vhost" >> ./.env
     ./node_src/build/bin/geth --datadir ./chaindata/node$i init ./genesis.json
     ((i += 1))
