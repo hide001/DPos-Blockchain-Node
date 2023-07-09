@@ -103,8 +103,9 @@ startValidator(){
 }
 
 finalize(){
-  welcome
   countNodes
+  welcome
+  
   if [ "$isRPC" = true ]; then
     echo -e "\n${GREEN}+------------------- Starting RPC -------------------+"
     startRpc
