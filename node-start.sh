@@ -13,8 +13,7 @@ NC='\033[0m' # No Color
 totalRpc=0
 totalValidator=0
 totalNodes=$(($totalRpc + $totalValidator))
-rpcFlag=.rpc
-validatoFlag=.validator
+
 isRPC=false
 isValidator=false
 
@@ -55,10 +54,10 @@ countNodes(){
   totalNodes=$(ls -l ./chaindata/ | grep -c ^d)
   while [[ $i -le $totalNodes ]]; do
     
-    if [ -f "./chaindata/node$i/$rpcFlag" ]; then  
+    if [ -f "./chaindata/node$i/.rpc" ]; then  
       totalRpc+=1 
     else  
-        if [ -f "./chaindata/node$i/$validatorFlag" ]; then
+        if [ -f "./chaindata/node$i/.validator" ]; then
         totalValidator+=1
         fi
     fi  
