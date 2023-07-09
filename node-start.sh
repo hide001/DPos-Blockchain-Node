@@ -52,7 +52,7 @@ welcome(){
 
 countNodes(){
   local i=1
-  totalNodes=$(ls -l | grep -c ^d)
+  totalNodes=$(ls -l ./chaindata/ | grep -c ^d)
   while [[ $i -le $totalNodes ]]; do
     
     if [ -f "./chaindata/$rpcFlag" ]; then  
