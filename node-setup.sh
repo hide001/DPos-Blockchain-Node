@@ -168,7 +168,7 @@ createRpc(){
 }
 
 createValidator(){
-  if [ $totalValidator -gt 0 ] then
+  if [[ $totalValidator -gt 0 ]]; then
       task8
   fi
    i=1
