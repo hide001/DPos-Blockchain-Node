@@ -168,7 +168,9 @@ createRpc(){
 }
 
 createValidator(){
-   task8
+  if [ $totalValidator -gt 0 ] then
+      task8
+  fi
    i=1
   while [[ $i -le $totalValidator ]]; do
     ./node_src/build/bin/geth --datadir ./chaindata/node$i init ./genesis.json
