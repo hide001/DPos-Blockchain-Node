@@ -55,10 +55,10 @@ countNodes(){
   totalNodes=$(ls -l ./chaindata/ | grep -c ^d)
   while [[ $i -le $totalNodes ]]; do
     
-    if [ -f "./chaindata/$rpcFlag" ]; then  
+    if [ -f "./chaindata/node$i/$rpcFlag" ]; then  
       totalRpc+=1 
     else  
-        if [ -f "./chaindata/$validatorFlag" ]; then
+        if [ -f "./chaindata/node$i/$validatorFlag" ]; then
         totalValidator+=1
         fi
     fi  
@@ -86,21 +86,11 @@ startRpc(){
 }
 
 startValidator(){
-  i=1
-  j=68
-  echo $i
-  echo $j
   while [[ $i -le $totalValidator ]]; do
-      echo "In while"
+    
     if tmux has-session -t node$i > /dev/null 2>&1; then
         :
     else
-        echo "In else"
-        echo $i
-        echo $j
-        echo $CHAINID
-        echo $BOOTNODE
-        echo $IP
         tmux new-session -d -s node$i
         tmux send-keys -t 0 "./node_src/build/bin/geth --datadir ./chaindata/node$i --networkid $CHAINID --bootnodes $BOOTNODE --mine --port 326$j --nat extip:$IP --unlock 0 --password ./chaindata/node$i/pass.txt --syncmode=full console" Enter
     fi
