@@ -74,6 +74,18 @@ const ValidatorsInteractiveABI = `[
 				"internalType": "uint256",
 				"name": "time",
 				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address[]",
+				"name": "To",
+				"type": "address[]"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint64[]",
+				"name": "Gass",
+				"type": "uint64[]"
 			}
 		],
 		"name": "LogDistributeBlockReward",
@@ -480,6 +492,38 @@ const ValidatorsInteractiveABI = `[
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "contractCreator",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "contractPartPercent",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address payable",
 				"name": "feeAddr",
 				"type": "address"
@@ -541,7 +585,18 @@ const ValidatorsInteractiveABI = `[
 		"type": "function"
 	},
 	{
-		"inputs": [],
+		"inputs": [
+			{
+				"internalType": "address[]",
+				"name": "_to",
+				"type": "address[]"
+			},
+			{
+				"internalType": "uint64[]",
+				"name": "_gass",
+				"type": "uint64[]"
+			}
+		],
 		"name": "distributeBlockReward",
 		"outputs": [],
 		"stateMutability": "payable",
@@ -1327,6 +1382,19 @@ const PunishInteractiveABI = `[
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "contractPartPercent",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -1755,6 +1823,19 @@ const ProposalInteractiveABI = `[
 	{
 		"inputs": [],
 		"name": "burnStopAmount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "contractPartPercent",
 		"outputs": [
 			{
 				"internalType": "uint256",
