@@ -74,18 +74,6 @@ const ValidatorsInteractiveABI = `[
 				"internalType": "uint256",
 				"name": "time",
 				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "address[]",
-				"name": "To",
-				"type": "address[]"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint64[]",
-				"name": "Gass",
-				"type": "uint64[]"
 			}
 		],
 		"name": "LogDistributeBlockReward",
@@ -465,32 +453,6 @@ const ValidatorsInteractiveABI = `[
 	},
 	{
 		"inputs": [],
-		"name": "blockChainOwner",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "blockChainOwnerPercent",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "burnPartPercent",
 		"outputs": [
 			{
@@ -505,38 +467,6 @@ const ValidatorsInteractiveABI = `[
 	{
 		"inputs": [],
 		"name": "burnStopAmount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "contractCreator",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "contractPartPercent",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -611,18 +541,7 @@ const ValidatorsInteractiveABI = `[
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address[]",
-				"name": "_to",
-				"type": "address[]"
-			},
-			{
-				"internalType": "uint64[]",
-				"name": "_gass",
-				"type": "uint64[]"
-			}
-		],
+		"inputs": [],
 		"name": "distributeBlockReward",
 		"outputs": [],
 		"stateMutability": "payable",
@@ -956,25 +875,6 @@ const ValidatorsInteractiveABI = `[
 		],
 		"name": "removeValidatorIncoming",
 		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_contract",
-				"type": "address"
-			}
-		],
-		"name": "setContractCreator",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -1383,32 +1283,6 @@ const PunishInteractiveABI = `[
 	},
 	{
 		"inputs": [],
-		"name": "blockChainOwner",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "blockChainOwnerPercent",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "burnPartPercent",
 		"outputs": [
 			{
@@ -1450,19 +1324,6 @@ const PunishInteractiveABI = `[
 			}
 		],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "contractPartPercent",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -1880,32 +1741,6 @@ const ProposalInteractiveABI = `[
 	},
 	{
 		"inputs": [],
-		"name": "blockChainOwner",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "blockChainOwnerPercent",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "burnPartPercent",
 		"outputs": [
 			{
@@ -1920,19 +1755,6 @@ const ProposalInteractiveABI = `[
 	{
 		"inputs": [],
 		"name": "burnStopAmount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "contractPartPercent",
 		"outputs": [
 			{
 				"internalType": "uint256",
